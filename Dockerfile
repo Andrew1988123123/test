@@ -26,8 +26,11 @@ RUN curl -s "https://get.sdkman.io" | bash \
     && sdk install maven $MAVEN_VERSION"
 
 
+# Set environment variables
 ENV JAVA_HOME="$HOME/.sdkman/candidates/java/current"
 ENV MAVEN_HOME="$HOME/.sdkman/candidates/maven/current"
 ENV NODE_HOME="$HOME/.nvm/versions/node/$NODE_VERSION"
 ENV NPM_HOME="$NODE_HOME/lib/node_modules"
-ENV PATH="$JAVA_HOME/bin:$MAVEN_HOME/bin:$NODE_HOME/bin:$NPM_HOME/bin:$PATH"
+
+# Combine the specified PATH components
+ENV PATH="$MAVEN_HOME/bin:$JAVA_HOME/bin:$NODE_HOME/bin:$NPM_HOME/bin:/root/.sdkman/candidates/java/current/bin:/root/.sdkman/candidates/maven/current/bin:/root/.nvm/versions/node/v$NODE_VERSION/bin:/.sdkman/candidates/java/current/bin:/.sdkman/candidates/maven/current/bin:/.nvm/versions/node/$NODE_VERSION/bin:/.nvm/versions/node/$NODE_VERSION/lib/node_modules/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
